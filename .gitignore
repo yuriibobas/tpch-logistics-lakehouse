@@ -7,4 +7,5 @@ __pycache__/
 
 # Databricks
 .databricks/
-*.dbc
+*.dbc.DS_Store
+*/.DS_Store
