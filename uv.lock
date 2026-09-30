@@ -132,7 +132,7 @@ wheels = [
 ]
 
 [[package]]
-name = "tpch-logistics-lakehouse"
+name = "src"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

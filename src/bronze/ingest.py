@@ -1,5 +1,4 @@
 from pyspark.sql import SparkSession
-from config.env import SOURCE_CATALOG, SOURCE_SCHEMA, BRONZE_SCHEMA
 
 TPCH_TABLES = [
     "customer", "lineitem", "nation", "orders", 
@@ -8,4 +7,3 @@ TPCH_TABLES = [
 
 def ingest_raw_tpch(spark: SparkSession) -> None:
     """Copies raw tables from samples.tpch into Bronze-layer as-is."""
-    ...

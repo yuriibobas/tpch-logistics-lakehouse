@@ -1,5 +1,6 @@
 from pyspark.sql import DataFrame
 
+
 def validate_date_sequence(
     lineitem_df: DataFrame, orders_df: DataFrame) -> DataFrame:
     """

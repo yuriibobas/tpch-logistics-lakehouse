@@ -1,5 +1,6 @@
 from pyspark.sql import DataFrame, SparkSession
 
+
 def compute_monthly_delay_rate(spark: SparkSession) -> DataFrame:
     """
     Calculates the number of items, received after commit_date, 
