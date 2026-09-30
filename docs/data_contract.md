@@ -56,11 +56,9 @@ This document specifies the schema, data quality expectations, integrity rules, 
 Every ETL pipeline executing the Silver layer build must enforce and record validation status for the following rules:
 
 ### 3.1. Temporal & Chronological Consistency
-- **Shipment Sequence**: An order cannot be shipped before it is placed:
-  $$\text{orders.order\_date} \le \text{lineitem.ship\_date}$$
+- **Shipment Sequence**: An order cannot be shipped before it is placed (orders.order_date <= lineitem.ship_date)
 
-- **Transit Sequence**: An item cannot be received before it has been shipped:
-  $$\text{lineitem.ship\_date} \le \text{lineitem.receipt\_date}$$
+- **Transit Sequence**: An item cannot be received before it has been shipped (lineitem.ship_date <= lineitem.receipt_date)
 
 
 ### 3.2. Categorical Whitelists (Allowed Values)
