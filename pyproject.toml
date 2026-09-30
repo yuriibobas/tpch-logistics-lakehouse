@@ -1,0 +1,26 @@
+[project]
+name = "tpch-logistics-lakehouse"
+version = "0.1.0"
+description = "Medallion Lakehouse on Databricks for TPC-H Logistics Profile"
+readme = "README.md"
+authors = [
+    { name = "Yurii Bobas", email = "bobas.pn@ucu.edu.ua" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "delta-spark>=4.4.0",
+    "pyspark>=4.2.0",
+]
+
+[project.scripts]
+tpch-logistics-lakehouse = "tpch_logistics_lakehouse:main"
+
+[build-system]
+requires = ["uv_build>=0.12.15,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.9",
+]
