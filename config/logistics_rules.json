@@ -1,0 +1,24 @@
+{
+  "allowed_ship_modes": [
+    "AIR",
+    "FOB",
+    "MAIL",
+    "RAIL",
+    "REG AIR",
+    "SHIP",
+    "TRUCK"
+  ],
+  "allowed_line_statuses": [
+    "O",
+    "F"
+  ],
+  "allowed_return_flags": [
+    "A",
+    "N",
+    "R"
+  ],
+  "date_rules": {
+    "ship_after_order": "l_shipdate >= o_orderdate",
+    "receipt_after_ship": "l_receiptdate >= l_shipdate"
+  }
+}
