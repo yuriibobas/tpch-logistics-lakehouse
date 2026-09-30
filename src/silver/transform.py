@@ -1,5 +1,6 @@
 from pyspark.sql import DataFrame, SparkSession
 
+
 def clean_lineitem(spark: SparkSession) -> DataFrame:
     """
     Read bronze.lineitem, normalize column names to snake_case,
@@ -17,4 +18,3 @@ def clean_orders(spark: SparkSession) -> DataFrame:
 
 def run_silver_transformations(spark: SparkSession) -> None:
     """Orchestrate the writing of cleaned tables to the Silver layer."""
-    pass
