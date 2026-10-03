@@ -1,0 +1,92 @@
+%% Editable Silver ER diagram; keep aligned with docs/data_contract.md.
+%% DECIMAL_18_2 means DECIMAL(18, 2). PK components form one tuple.
+%% Dotted direct part/supplier links are implied by partsupp.
+erDiagram
+    direction LR
+    region {
+        BIGINT region_key PK "NOT NULL"
+        STRING name "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    nation {
+        BIGINT nation_key PK "NOT NULL"
+        STRING name "NOT NULL"
+        BIGINT region_key FK "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    supplier {
+        BIGINT supp_key PK "NOT NULL"
+        STRING name "NOT NULL"
+        STRING address "NOT NULL"
+        BIGINT nation_key FK "NOT NULL"
+        STRING phone "NOT NULL"
+        DECIMAL_18_2 acct_balance "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    customer {
+        BIGINT cust_key PK "NOT NULL"
+        STRING name "NOT NULL"
+        STRING address "NOT NULL"
+        BIGINT nation_key FK "NOT NULL"
+        STRING phone "NOT NULL"
+        DECIMAL_18_2 acct_balance "NOT NULL"
+        STRING market_segment "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    part {
+        BIGINT part_key PK "NOT NULL"
+        STRING name "NOT NULL"
+        STRING manufacturer "NOT NULL"
+        STRING brand "NOT NULL"
+        STRING type "NOT NULL"
+        INT size "NOT NULL"
+        STRING container "NOT NULL"
+        DECIMAL_18_2 retail_price "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    partsupp {
+        BIGINT part_key PK, FK "NOT NULL; composite PK member"
+        BIGINT supp_key PK, FK "NOT NULL; composite PK member"
+        INT avail_quantity "NOT NULL"
+        DECIMAL_18_2 supply_cost "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    orders {
+        BIGINT order_key PK "NOT NULL"
+        BIGINT cust_key FK "NOT NULL"
+        STRING order_status "NOT NULL"
+        DECIMAL_18_2 total_price "NOT NULL"
+        DATE order_date "NOT NULL"
+        STRING order_priority "NOT NULL"
+        STRING clerk "NOT NULL"
+        INT ship_priority "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    lineitem {
+        BIGINT order_key PK, FK "NOT NULL; composite PK member"
+        BIGINT part_key FK "NOT NULL; composite FK to partsupp"
+        BIGINT supp_key FK "NOT NULL; composite FK to partsupp"
+        INT line_number PK "NOT NULL; composite PK member"
+        DECIMAL_18_2 quantity "NOT NULL"
+        DECIMAL_18_2 extended_price "NOT NULL"
+        DECIMAL_18_2 discount "NOT NULL"
+        DECIMAL_18_2 tax "NOT NULL"
+        STRING return_flag "NOT NULL"
+        STRING line_status "NOT NULL"
+        DATE ship_date "NOT NULL"
+        DATE commit_date "NOT NULL"
+        DATE receipt_date "NOT NULL"
+        STRING ship_instruct "NULLABLE"
+        STRING ship_mode "NOT NULL"
+        STRING comment "NULLABLE"
+    }
+    region ||--o{ nation : "region_key"
+    nation ||--o{ supplier : "nation_key"
+    nation ||--o{ customer : "nation_key"
+    part ||--o{ partsupp : "part_key"
+    supplier ||--o{ partsupp : "supp_key"
+    customer ||--o{ orders : "cust_key"
+    orders ||--|{ lineitem : "order_key"
+    partsupp ||--o{ lineitem : "part_key, supp_key"
+    part ||..o{ lineitem : "part_key"
+    supplier ||..o{ lineitem : "supp_key"
