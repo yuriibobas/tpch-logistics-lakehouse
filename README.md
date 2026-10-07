@@ -12,6 +12,13 @@ Group assignment for the Big Data course at the Ukrainian Catholic University (U
 - **Silver Layer (`tpch_silver`):** Cleaned, 3NF-compliant tables with enforced `snake_case` naming conventions, casted data types, and robust data quality rules. Invalid rows are quarantined, preserving parent record integrity.
 - **Gold Layer (`tpch_gold`):** Business-level aggregations answering core SLA questions (transit time percentiles, order vs. lineitem fulfillment gaps, priority speed, and delay rate monitoring).
 
+## 📄 Data Contract & Detailed Documentation
+For a deep dive into the project's business logic, data schemas, and validation rules, please refer to our **[Data Contract](docs/data_contract.md)**. This document serves as the single source of truth (SSOT) for the pipeline and includes:
+- **Schema Definitions:** Exact SQL types, keys, and 3NF mappings for all tables.
+- **Data Quality Rules:** Temporal integrity constraints, referential checks, and categorical whitelists enforced during the Silver ETL.
+- **Business Logic:** Complete definitions and metric breakdowns for analytical queries (Q1-Q4) and SLA monitoring.
+- **Visualizations:** Silver layer ER diagram and analytical charts supporting our business conclusions.
+
 ## 🛠 Local Setup & Development
 The project strictly uses `uv` for dependency management.
 
