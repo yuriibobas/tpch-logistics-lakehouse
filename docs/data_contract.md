@@ -212,7 +212,9 @@ The ER diagram documents the intended validated Silver state; it does not
 claim these constraints have already been implemented.
 
 Diagram source: `docs/diagrams/silver_er.mmd`. Presentation image:
-`docs/diagrams/silver_er.png`. Keep the Mermaid attributes and relationships
+`docs/diagrams/silver_er.png`:
+![Silver ER Diagram](diagrams/silver_er.png)
+Keep the Mermaid attributes and relationships
 aligned with this contract. Regenerate the PNG from the repository root with
 `python3 docs/render_silver_er.py` (requires Graphviz). The script creates only
 the PNG; it does not save intermediate DOT or SVG files. `DECIMAL_18_2` in
@@ -258,6 +260,9 @@ The Gold layer must provide aggregated data structures to directly answer the cu
   - `p90_transit_days`: 90th percentile of (receipt_date - ship_date).
 - **Objective**: Identify the fastest mode (lowest median) vs. the most predictable mode (lowest spread/p90).
 
+**Transit Time Performance**
+![Q1 Transit Time Performance](diagrams/Q1_transit_time_performance.png)
+
 ### 4.2. `mart_order_fulfillment_sla` (Question 2)
 - **Granularity**: Aggregate / Monthly
 - **Metrics**:
@@ -265,6 +270,10 @@ The Gold layer must provide aggregated data structures to directly answer the cu
   - `order_fully_on_time_rate`: Share of orders where **all** constituent line items met receipt_date <= commit_date.
 - **Objective**: Quantify and explain the SLA gap between individual line item delivery and whole-order completion.
 
+**Order Fulfillment SLA (with clear gap)**
+![Q2 Order Fulfillment SLA Gap](diagrams/Q2_order_fulfillment_sla_gap.png)
+**Order Fulfillment SLA**
+![Q2 Order Fulfillment SLA](diagrams/Q2_order_fulfillment_sla.png)
 ### 4.3. `mart_ship_mode_delays` (Question 3)
 - **Granularity**: `ship_mode`
 - **Metrics**:
@@ -273,14 +282,24 @@ The Gold layer must provide aggregated data structures to directly answer the cu
   - `delay_rate_pct`: delayed_items_count / total_items_shipped * 100.
 - **Objective**: Identify the worst-performing delivery partner/mode by delay frequency.
 
+**Ship Mode Delays**
+![Q3 Ship Mode Delays](diagrams/Q3_ship_mode_delays.png)
+
 ### 4.4. `mart_priority_fulfillment_speed` (Question 4)
 - **Granularity**: `order_priority`
 - **Metrics**:
   - Average and median order fulfillment duration.
 - **Objective**: Empirically evaluate whether urgent-priority orders are fulfilled significantly faster than routine orders.
 
+**Priority Fulfillment Speed**
+![Q4 Priority Fulfillment Speed](diagrams/Q4_priority_fulfillment_speed.png)
+
+
 ---
 
 ## 5. Continuous Monitoring & Alerting Specification
 - **Metric to Track**: Monthly `delay_rate_pct` across all fulfilled shipments.
 - **Alert Condition**: Trigger an alert when the monthly delay rate exceeds a designated SLA threshold (e.g., > 15% or a 20% relative increase period-over-period).
+
+**Monitoring Delay Rate**
+![Monitoring Delay Rate](diagrams/monitoring_delay_rate.png)
