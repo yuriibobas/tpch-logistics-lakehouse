@@ -1,19 +1,19 @@
 # Big Data Analytics: TPC-H Logistics Lakehouse
 
-Semester team project for the Big Data course at the Ukrainian Catholic University (UCU). This repository implements an automated, Medallion Lakehouse architecture (Bronze, Silver, Gold) on Databricks to analyze delivery performance, SLA adherence, and transit time predictability for the **Logistics** customer profile.
+Group assignment for the Big Data course at the Ukrainian Catholic University (UCU). This repository implements an automated, Medallion Lakehouse architecture (Bronze, Silver, Gold) on Databricks to analyze delivery performance, SLA adherence, and transit time predictability for the **Logistics** customer profile.
 
 ## 📌 Project Links
-- **Presentation:** [Link to Google Slides / Canva]
-- **Databricks Environment:** [https://dbc-6636093d-2727.cloud.databricks.com/](https://dbc-6636093d-2727.cloud.databricks.com/)
+- **Presentation:** https://canva.link/gx6ote4vejn9oxi
+- **Databricks Environment:** https://dbc-6636093d-2727.cloud.databricks.com/
 - **Silver ER Diagram:** [docs/diagrams/silver_er.png](docs/diagrams/silver_er.png)
 
 ## 🏗 Medallion Architecture
 - **Bronze Layer (`tpch_bronze`):** Raw, unprocessed ingestion of 8 TPC-H tables directly from `samples.tpch` using Delta format.
 - **Silver Layer (`tpch_silver`):** Cleaned, 3NF-compliant tables with enforced `snake_case` naming conventions, casted data types, and robust data quality rules. Invalid rows are quarantined, preserving parent record integrity.
-- **Gold Layer (`tpch_gold`):** Business-level aggregations answering core SLA questions (transit time percentiles, order vs. lineitem fulfillment gaps, priority speed, and delay rate monitoring)[cite: 1, 5, 6].
+- **Gold Layer (`tpch_gold`):** Business-level aggregations answering core SLA questions (transit time percentiles, order vs. lineitem fulfillment gaps, priority speed, and delay rate monitoring).
 
 ## 🛠 Local Setup & Development
-The project strictly uses `uv` for dependency management[cite: 2].
+The project strictly uses `uv` for dependency management.
 
 ```bash
 # Clone the repository
